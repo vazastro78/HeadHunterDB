@@ -43,18 +43,20 @@ def get_formatted_vacancies(vacancies_list):
 def user_interaction():
     is_online = False
 
-    # search_query = input("Введите поисковый запрос: ")
-    # top_n = int(input("Введите количество вакансий для вывода в топ N: "))
-    # keyword_list = input("Введите ключевые слова для фильтрации вакансий: ").split()
-    # salary_min = input("Введите нижнюю планку зарплаты: ") # Пример: 100000
-    # salary_max = input("Введите верхнюю планку зарплаты: ") # Пример: 150000
+    search_query = input("Введите поисковый запрос: ")
+    top_n = int(input("Введите количество вакансий для вывода в топ N: "))
+    keyword_list = input("Введите ключевые слова для фильтрации вакансий (разделитель пробелЗе): ").split()
+    salary_min = int(input("Введите нижнюю планку зарплаты: (число): ")) # Пример: 100000
+    salary_max = int(input("Введите верхнюю планку зарплаты (число): ")) # Пример: 150000
 
+    '''
     search_query = "Python"
     top_n = 5
     # keyword_list = ["танц"]
     keyword_list = ["Python", "Git"]
     salary_min = 1
     salary_max = 1e9
+    '''
 
     # Создание экземпляра класса для работы с API сайтов с вакансиями
     filename = os.path.join(BASE_DIR, "data", "hh_python.json")
