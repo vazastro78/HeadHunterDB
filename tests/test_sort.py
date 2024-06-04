@@ -9,9 +9,3 @@ def test_vacancy_sort():
     vacancies_list.sort(reverse=True)
     compare_value = [vacancy_item.id for vacancy_item in vacancies_list]
     assert compare_value == [3, 2, 1]
-
-
-
-
-
-

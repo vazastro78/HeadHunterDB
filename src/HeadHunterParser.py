@@ -1,10 +1,14 @@
 import requests
 import json
-import os
-from JobApplicationParser import JobApplicationParser
-from Vacancy import Vacancy
 
-from currency_utils import *
+
+from src.JobApplicationParser import JobApplicationParser
+from src.Vacancy import Vacancy
+
+from src.currency_utils import *
+
+import os.path
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 class HeadHunterParser(JobApplicationParser):
@@ -70,7 +74,7 @@ class HeadHunterParser(JobApplicationParser):
 
 
 if __name__ == "__main__":
-    filename = os.path.join("..", "data", "hh_python.json")
+    filename = os.path.join(BASE_DIR, "data", "hh_python.json")
 
     is_online = False
     hh = HeadHunterParser(filename)
