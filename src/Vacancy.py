@@ -90,27 +90,4 @@ class Vacancy():
 
 if __name__ == "__main__":
     vacancy1 = Vacancy(91241, "Python Developer1", 1, 15, "Требования: опыт работы от 1 года...", "https://api.hh.ru/vacancies/98952800?host=hh.ru")
-    '''
-    
-    print(vacancy1)
-    print(vacancy1.__repr__())
-
-    vacancy2 = Vacancy(91242, "Python Developer2", 90000, 180000, "Требования: опыт работы от 2х лет...")
-
-    vacancy3 = Vacancy(91243, "Python Developer3", 40000, 200000, "Требования: опыт работы от 3х лет...")
-
-    print(vacancy1 > 10000)  # True
-
-    print(vacancy1 > vacancy2) # False
-
-    #print(vacancy2 > "asa")  # TypeError
-
-    a = [vacancy1, vacancy2, vacancy3]
-    a.sort(reverse=True)
-    print(a)
-    
-    print("Pythons" in vacancy1)
-    print(["Python", "developer"] in vacancy1)
-    print(["Python", "Assistent"] in vacancy1)
-    '''
     print( vacancy1.is_salary_between(1, 16) )
