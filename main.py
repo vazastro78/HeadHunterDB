@@ -41,11 +41,11 @@ def get_formatted_vacancies(vacancies_list):
 
 
 def user_interaction():
-    is_online = False
+    is_online = True
 
     search_query = input("Введите поисковый запрос: ")
     top_n = int(input("Введите количество вакансий для вывода в топ N: "))
-    keyword_list = input("Введите ключевые слова для фильтрации вакансий (разделитель пробелЗе): ").split()
+    keyword_list = input("Введите ключевые слова для фильтрации вакансий (разделитель пробел): ").split()
     salary_min = int(input("Введите нижнюю планку зарплаты: (число): "))  # Пример: 100000
     salary_max = int(input("Введите верхнюю планку зарплаты (число): "))  # Пример: 150000
 
