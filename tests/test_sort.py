@@ -2,6 +2,12 @@ from src.Vacancy import Vacancy
 
 
 def test_vacancy_sort():
+    """
+    создается три разных вакансии
+    из них формируется список вперемежку
+    проводится сортировка
+    :return: в результате должны встать по в обратном  порядке по id
+    """
     vacancy1 = Vacancy(1, "Vacancy Name", 5, 7, "Требования: опыт работы от 10 лет", "https://api.hh.ru/")
     vacancy2 = Vacancy(2, "Vacancy Name", 1, 8, "Требования: опыт работы от 20 лет", "https://api.hh.ru/")
     vacancy3 = Vacancy(3, "Vacancy Name", 2, 9, "Требования: опыт работы от 30 лет", "https://api.hh.ru/")
