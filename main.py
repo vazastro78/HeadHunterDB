@@ -1,6 +1,8 @@
-import os
+from src.HeadHunterParser import HeadHunterParser
+import os.path
 
-from HeadHunterParser import HeadHunterParser
+
+BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
 
 
 def filter_vacancies(vacancies_list, keyword_list):
@@ -55,8 +57,8 @@ def user_interaction():
     salary_max = 1e9
 
     # Создание экземпляра класса для работы с API сайтов с вакансиями
-    filename = os.path.join("..", "data", "hh_python.json")
-#    filename = os.path.join("..", "data", "vacancies_example.json")
+    filename = os.path.join(BASE_DIR, "data", "hh_python.json")
+#    filename = os.path.join(BASE_DIR, "data", "vacancies_example.json")
     hh = HeadHunterParser(filename)
     if is_online:
         # Получение вакансий с hh.ru в формате JSON
@@ -67,8 +69,6 @@ def user_interaction():
 
     # Преобразование набора данных из JSON в список объектов
     vacancies_list = hh.parse_and_verify()
-
-
 
     filtered_vacancies = filter_vacancies(vacancies_list, keyword_list)
     ranged_vacancies = get_vacancies_by_salary(filtered_vacancies, salary_min, salary_max)
