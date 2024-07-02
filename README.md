@@ -41,6 +41,11 @@
 - создается экземляр класса DBManager и выполняются требуемые функции-запросы: 
 get_companies_and_vacancies_count(), get_all_vacancies(), get_avg_salary(), get_vacancies_with_higher_salary(),  get_vacancies_with_keyword()  
 
+#### САМОПРОВЕРКА. Детали оформления решения
+- [x]  Проект выложен на GitHub.
+- [x]  Оформлен файл README.md с информацией, о чем проект, как его запустить и как с ним работать.
+- [x]  Есть Python-модуль для создания и заполнения данными таблиц БД.
+
 ### Реализация класса DBManager
 
 Создайте класс DBManager, который будет подключаться к БД PostgreSQL и иметь следующие методы:
