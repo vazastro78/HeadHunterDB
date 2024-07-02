@@ -1,5 +1,6 @@
 import requests
 import json
+import time
 
 
 from src.JobApplicationParser import JobApplicationParser
@@ -24,6 +25,16 @@ class HeadHunterParser(JobApplicationParser):
 
     def load_vacancies(self, keyword):
         self.params['text'] = keyword
+        while self.params.get('page') != 20:
+            response = requests.get(self.url, headers=self.headers, params=self.params)
+            vacancies_list_part = response.json()['items']
+            self.vacancies_list.extend(vacancies_list_part)
+            self.params['page'] += 1
+
+    def load_vacancies_by_employer(self, employer_id):
+        self.params['employer_id'] = employer_id
+        self.params['L_is_autosearch'] = False
+        self.params['ored_clusters'] = True
         while self.params.get('page') != 20:
             response = requests.get(self.url, headers=self.headers, params=self.params)
             vacancies_list_part = response.json()['items']
@@ -74,15 +85,31 @@ class HeadHunterParser(JobApplicationParser):
 
 
 if __name__ == "__main__":
-    filename = os.path.join(BASE_DIR, "data", "hh_python.json")
+    Companies = [
+        [3388, "Газпромбанк"],
+        [4934, "ПАО ВЫМПЕЛКОМ Билайн"],
+        [3529, "Сбербанк"],
+        [2242, "РЕСО-Гарантия"],
+        [78638, "Т-Банк"],
+        [1057, "Лаборатория Касперского"],
+        [869045, "Московский метрополитен"],
+        [2748, "ПАО Ростелеком"],
+        [58320, "Россельхозбанк"],
+        [23427, "РЖД"]
+    ]
+    for employer_id, name in Companies:
 
-    is_online = False
-    hh = HeadHunterParser(filename)
-    if is_online:
-        hh.load_vacancies("Python")
-        hh.save_to_file()
-    else:
-        hh.load_from_file()
+        filename = os.path.join(BASE_DIR, "data", f"hh_{employer_id}.json")
 
-    vacancies_list = hh.parse_and_verify()
-    print(vacancies_list)
+        is_online = True
+        hh = HeadHunterParser(filename)
+        if is_online:
+            #hh.load_vacancies("Python")
+            hh.load_vacancies_by_employer(employer_id)
+            hh.save_to_file()
+            time.sleep(100)
+        else:
+            hh.load_from_file()
+
+    #vacancies_list = hh.parse_and_verify()
+    #print(vacancies_list)
