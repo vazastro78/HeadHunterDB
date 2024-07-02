@@ -1,7 +1,7 @@
 import requests
 import json
 import time
-
+import codecs
 
 from src.JobApplicationParser import JobApplicationParser
 from src.Vacancy import Vacancy
@@ -43,8 +43,8 @@ class HeadHunterParser(JobApplicationParser):
 
     def save_to_file(self):
         json_text = {"items": self.vacancies_list}
-        with open(self.json_filename, mode="w", encoding='utf8') as fp:
-            json.dump(json_text, fp)
+        with codecs.open(self.json_filename, mode="w", encoding='utf8') as fp:
+            json.dump(json_text, fp, ensure_ascii=False)
 
     def load_from_file(self):
         with open(self.json_filename, mode="r", encoding='utf8') as fp:
