@@ -16,11 +16,52 @@
 ### Реализация класса DBManager
 
 Создайте класс DBManager, который будет подключаться к БД PostgreSQL и иметь следующие методы:
-- get_companies_and_vacancies_count() — получает список всех компаний и количество вакансий у каждой компании.
+- get_companies_and_vacancies_count() — получает список всех компаний и количество вакансий у каждой компании.  
 - get_all_vacancies() — получает список всех вакансий с указанием названия компании, названия вакансии и зарплаты и ссылки на вакансию.
 - get_avg_salary() — получает среднюю зарплату по вакансиям.
 - get_vacancies_with_higher_salary() — получает список всех вакансий, у которых зарплата выше средней по всем вакансиям.
 - get_vacancies_with_keyword() — получает список всех вакансий, в названии которых содержатся переданные в метод слова, например python.
+
+
+#### Функции класса DBManager
+- get_companies_and_vacancies_count() — получает список всех компаний и количество вакансий у каждой компании.  
+
+``` sql
+SELECT E.name, COUNT(V.name) FROM vacancy AS V
+JOIN  employer AS E USING(employer_id) GROUP BY E.name
+	ORDER BY COUNT(V.name) DESC;
+```
+
+- get_all_vacancies() — получает список всех вакансий с указанием названия компании, названия вакансии и зарплаты и ссылки на вакансию.
+``` sql
+SELECT E.name, V.name, V.url FROM vacancy AS V
+	JOIN employer AS E USING(employer_id);
+```
+	
+- get_avg_salary() — получает среднюю зарплату по вакансиям.
+``` sql
+SELECT AVG(V.salary)  FROM vacancy AS V
+	WHERE LOWER(V.name) like LOWER('%администратор%') and V.salary>0 ;
+```
+
+
+- get_vacancies_with_higher_salary() — получает список всех вакансий, у которых зарплата выше средней по всем вакансиям.
+``` sql
+SELECT DISTINCT name  FROM vacancy AS V
+	WHERE salary > (SELECT AVG(V.salary) FROM vacancy AS V WHERE salary>0);
+```
+	
+- get_vacancies_with_keyword() — получает список всех вакансий, в названии которых содержатся переданные в метод слова, например python.
+``` sql
+SELECT DISTINCT V.name FROM vacancy AS V
+	WHERE LOWER(V.name) like LOWER('%офис%');
+
+SELECT DISTINCT V.name FROM vacancy AS V
+	WHERE LOWER(V.name) like LOWER('%администратор%');
+```
+
+
+
 
 Класс DBManager должен использовать библиотеку psycopg2 для работы с БД.
 
